@@ -1,0 +1,123 @@
+import java.util.Scanner;
+
+// In this simple banking application you will be coding the simple bank operations like check balance, deposit, withdraw, exit, etc.
+
+class BankAccount
+{
+	
+	int balance,previoustransaction;
+	String customername,customerid;
+	
+	BankAccount(String cname, String cid)
+	{
+		customername = cname;
+		customerid = cid;	
+	}
+	
+	void deposit(int amount)
+	{
+		if(amount!=0) 
+		{
+			balance = balance + amount;
+			previoustransaction = amount;
+		}
+	}
+	
+	void withdraw(int amount)
+	{
+		balance = balance - amount;
+		previoustransaction = -amount;
+	}
+	
+	void getprevioustransaction()
+	{
+		if(previoustransaction > 0 )
+		{
+			System.out.println("Deposited : "+previoustransaction);
+		}
+		else if( previoustransaction < 0 ) 
+		{
+			System.out.println("  Withdrawn : "+ Math.abs(previoustransaction));
+		}
+		else 
+		{
+			System.out.println(" No transaction occured.");
+		}
+	}
+	
+	void showmenu() 
+	{
+		char option = '\0';
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Welcome : "+customername);
+		System.out.println("Your Id is : "+customerid);
+		System.out.println("\n");
+		System.out.println("A. Check Balance : ");
+		System.out.println("B. Deposit : ");
+		System.out.println("C. Withdraw : ");
+		System.out.println("D. Previous Transaction : ");
+		System.out.println("E. Exit ");
+		
+		do 
+		{
+			System.out.println("================================================");
+			System.out.println("Enter an option : ");
+			System.out.println("================================================");
+			option = sc.next().charAt(0);
+			System.out.println("\n");
+			
+			switch(option) 
+			{
+			case 'A':
+				System.out.println("----------------------------------");
+				System.out.println("Balance : "+balance);
+				System.out.println("----------------------------------");
+				System.out.println("\n");
+				break;
+				
+			case 'B':
+				System.out.println("----------------------------------");
+				System.out.println("Enter an amount to deposit: ");
+				System.out.println("----------------------------------");
+				int amount = sc.nextInt();
+				deposit(amount);
+				System.out.println("\n");
+				break;
+				
+			case 'C':
+				System.out.println("----------------------------------");
+				System.out.println("Enter an amount to withdraw : ");
+				System.out.println("----------------------------------");
+				int amount2 = sc.nextInt();
+				withdraw(amount2);
+				System.out.println("\n");
+				break;
+				
+			case 'D':
+				System.out.println("-----------------------------------");
+				getprevioustransaction();
+				System.out.println("-----------------------------------");
+				System.out.println("\n");
+				break;
+			case 'E':
+				System.out.println("-----------------------------------------------");
+				break;
+				default: 
+					System.out.println("Invalid option !! Please try again. ");
+				break;
+			}
+		}while(option!='E');
+		System.out.println("Thank you for using our services.");
+	}
+	
+}
+public class BankingApplication1 {
+
+	public static void main(String[] args) {
+	
+		BankAccount obj = new BankAccount("Amit Sharma","BA0001");
+		obj.showmenu();
+	}
+
+}
